@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct UsersListView: View {
-//#warning("remove the forPreview argument or set it to false before uploading to App Store")
+    //#warning("remove the forPreview argument or set it to false before uploading to App Store")
     
     @StateObject var vm = UsersListViewModel()
     
@@ -43,9 +43,10 @@ struct UsersListView: View {
             })
             .navigationTitle("Users")
             .listStyle(.plain)
-            .onAppear {
-                vm.fetchUsers()
+            .task {
+                await vm.fetchUsers()
             }
+            
         }
     }
 }

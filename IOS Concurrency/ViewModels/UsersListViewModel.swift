@@ -18,35 +18,20 @@ class UsersListViewModel: ObservableObject {
     @Published var showAlert = false
     @Published var errorMessage: String?
     
-    func fetchUsers() {
+    @MainActor
+    func fetchUsers() async {
         let apiService = APIService(urlString: "https://jsonplaceholder.typicode.com/users")
         
         // Make isLoading true when we start fetching the data.
         isLoading.toggle()
-        
-        // As purpose to simulate a low connection.
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-            
-            apiService.getJSON { (result: Result<[User], APIError>) in
-                
-                // Use Defer the will be executed after the data is retrived and processes, so we set isLoading back to false, on the main thread.
-                defer {
-                    DispatchQueue.main.sync {
-                        self.isLoading.toggle()
-                    }
-                }
-                switch result {
-                case .success(let users):
-                    DispatchQueue.main.async {
-                        self.users = users
-                    }
-                case.failure(let error):
-                    DispatchQueue.main.async {
-                        self.showAlert = true
-                        self.errorMessage = error.localizedDescription + "\nPlease contact the developer and provide this error and the steps to reproduce."
-                    }
-                }
-            }
+        defer {
+            isLoading.toggle()
+        }
+        do {
+            users = try await apiService.getJSON()
+        } catch {
+            showAlert = true
+            errorMessage = error.localizedDescription + "\nPlease contact the developer and provide this error and the steps to reproduce."
         }
     }
 }
