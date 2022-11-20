@@ -14,6 +14,10 @@ class UsersListViewModel: ObservableObject {
     // Add progressView() for users low connection to visually know what's going on.
     @Published var isLoading = false
     
+    // To provide an alert to the user with the error case.
+    @Published var showAlert = false
+    @Published var errorMessage: String?
+    
     func fetchUsers() {
         let apiService = APIService(urlString: "https://jsonplaceholder.typicode.com/users")
         
@@ -37,7 +41,10 @@ class UsersListViewModel: ObservableObject {
                         self.users = users
                     }
                 case.failure(let error):
-                    print(error)
+                    DispatchQueue.main.async {
+                        self.showAlert = true
+                        self.errorMessage = error.localizedDescription + "\nPlease contact the developer and provide this error and the steps to reproduce."
+                    }
                 }
             }
         }
