@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct UsersListView: View {
-//#warning("remove the forPreview argument or set it to false before uploading to App Store")
+    //#warning("remove the forPreview argument or set it to false before uploading to App Store")
     
     @StateObject var vm = UsersListViewModel()
     
@@ -29,22 +29,22 @@ struct UsersListView: View {
                     }
                 }
             }
-            .overlay(content: {
-                if vm.isLoading {
-                    ProgressView()
+            .overlay(
+                Group {
+                    if vm.isLoading {
+                        ProgressView()
+                    }
                 }
-            })
-            .alert("Application Error", isPresented: $vm.showAlert, actions: {
-                Button("OK") {}
-            }, message: {
-                if let errorMessage = vm.errorMessage {
-                    Text(errorMessage)
-                }
+            )
+            .alert(isPresented: $vm.showAlert, content: {
+                Alert(title: Text("Application Error"), message: Text(vm.errorMessage ?? ""))
             })
             .navigationTitle("Users")
             .listStyle(.plain)
             .onAppear {
-                vm.fetchUsers()
+                Task {
+                    await vm.fetchUsers()
+                }
             }
         }
     }

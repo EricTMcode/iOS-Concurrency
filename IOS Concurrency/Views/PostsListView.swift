@@ -24,24 +24,24 @@ struct PostsListView: View {
                 }
             }
         }
-        .overlay(content: {
-            if vm.isLoading {
-                ProgressView()
+        .overlay(
+            Group {
+                if vm.isLoading {
+                    ProgressView()
+                }
             }
-        })
-        .alert("Application Error", isPresented: $vm.showAlert, actions: {
-            Button("OK") {}
-        }, message: {
-            if let errorMessage = vm.errorMessage {
-                Text(errorMessage)
-            }
+        )
+        .alert(isPresented: $vm.showAlert, content: {
+            Alert(title: Text("Application Error"), message: Text(vm.errorMessage ?? ""))
         })
         .navigationTitle("Posts")
         .navigationBarTitleDisplayMode(.inline)
         .listStyle(.plain)
         .onAppear {
-            vm.userId = userID
-            vm.fetchPosts()
+            Task {
+                vm.userId = userID
+                await vm.fetchPosts()
+            }
         }
     }
 }
