@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0743A500292AD8B000C13399 /* UserAndPosts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0743A4FF292AD8B000C13399 /* UserAndPosts.swift */; };
 		07DC7CAB2928C2C100C78A49 /* IOS_ConcurrencyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07DC7CAA2928C2C100C78A49 /* IOS_ConcurrencyApp.swift */; };
 		07DC7CAD2928C2C100C78A49 /* UsersListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07DC7CAC2928C2C100C78A49 /* UsersListView.swift */; };
 		07DC7CAF2928C2C200C78A49 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 07DC7CAE2928C2C200C78A49 /* Assets.xcassets */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0743A4FF292AD8B000C13399 /* UserAndPosts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAndPosts.swift; sourceTree = "<group>"; };
 		07DC7CA72928C2C100C78A49 /* IOS Concurrency.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "IOS Concurrency.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		07DC7CAA2928C2C100C78A49 /* IOS_ConcurrencyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOS_ConcurrencyApp.swift; sourceTree = "<group>"; };
 		07DC7CAC2928C2C100C78A49 /* UsersListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersListView.swift; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 			children = (
 				07DC7CBC2928C3B800C78A49 /* User.swift */,
 				07DC7CBE2928C46A00C78A49 /* Post.swift */,
+				0743A4FF292AD8B000C13399 /* UserAndPosts.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -211,6 +214,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0743A500292AD8B000C13399 /* UserAndPosts.swift in Sources */,
 				07DC7CAD2928C2C100C78A49 /* UsersListView.swift in Sources */,
 				07DC7CD0292909F500C78A49 /* Bundle+Extension.swift in Sources */,
 				07DC7CC92929077900C78A49 /* UsersListViewModel.swift in Sources */,

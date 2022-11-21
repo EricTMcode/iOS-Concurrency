@@ -10,21 +10,23 @@ import SwiftUI
 struct UsersListView: View {
     //#warning("remove the forPreview argument or set it to false before uploading to App Store")
     
-    @StateObject var vm = UsersListViewModel()
+    @StateObject var vm = UsersListViewModel(forPreview: false)
     
     var body: some View {
         NavigationView {
             List {
-                ForEach(vm.users) { user in
+                ForEach(vm.usersAndPosts) { userAndPosts in
                     NavigationLink {
-                        PostsListView(userID: user.id)
+                        PostsListView(posts: userAndPosts.posts)
                     } label: {
-                        
-                        
                         VStack(alignment: .leading) {
-                            Text(user.name)
-                                .font(.title)
-                            Text(user.email)
+                            HStack {
+                                Text(userAndPosts.user.name)
+                                    .font(.title)
+                                Spacer()
+                                Text("(\(userAndPosts.numberOfPosts))")
+                            }
+                            Text(userAndPosts.user.email)
                         }
                     }
                 }
